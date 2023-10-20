@@ -2,7 +2,7 @@ import {
   IsDate,
   IsEmail,
   IsInt,
-  IsNotEmpty,
+  IsOptional,
   IsString,
   Length,
 } from 'class-validator';
@@ -12,21 +12,21 @@ export class UpdateUserDTO {
   readonly id: number;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(3, 10)
   readonly first_name: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(3, 16)
   readonly last_name: string;
 
   @IsEmail()
-  @IsNotEmpty()
+  @IsOptional()
   readonly email: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   @Length(6, 12)
   readonly password: string;
 
