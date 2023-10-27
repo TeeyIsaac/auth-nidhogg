@@ -1,27 +1,15 @@
-import { IsDate, IsEmail, IsInt, IsJWT, IsString } from 'class-validator';
+import { IsEmail, IsNumber, IsString } from 'class-validator';
 
 export class GetUserDTO {
-  @IsInt()
-  readonly id: number;
+  @IsNumber()
+  readonly id?: number;
 
   @IsString()
-  readonly first_name: string;
-
-  @IsString()
-  readonly last_name: string;
-
-  @IsString()
-  readonly email: string;
+  readonly first_name?: string;
 
   @IsEmail()
+  readonly email: string;
+
+  @IsString()
   readonly password?: string;
-
-  @IsJWT()
-  readonly token?: string;
-
-  @IsDate()
-  readonly createAt: Date;
-
-  @IsDate()
-  readonly updateAt?: Date;
 }

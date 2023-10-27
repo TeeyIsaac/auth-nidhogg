@@ -1,19 +1,9 @@
-import {
-  IsEmail,
-  IsInt,
-  IsJWT,
-  IsNotEmpty,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
 
 export class CreateUserDTO {
-  @IsInt()
-  readonly id: number;
-
   @IsString()
   @IsNotEmpty()
-  @Length(3, 10)
+  @Length(3, 12)
   readonly first_name: string;
 
   @IsString()
@@ -27,9 +17,6 @@ export class CreateUserDTO {
 
   @IsString()
   @IsNotEmpty()
-  @Length(6, 12)
+  @Length(4, 20)
   readonly password: string;
-
-  @IsJWT()
-  readonly token: string;
 }
