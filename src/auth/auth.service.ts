@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDTO, GetUserDTO } from 'src/users/dto/index';
 import { UsersService } from 'src/users/users.service';
@@ -34,6 +38,10 @@ export class AuthService {
       email: userData.email,
     });
 
+    if (!userData.email) {
+      throw new NotFoundException();
+    }
+
     const passwordCompare = await compare(
       userData.password,
       userLogin.password,
@@ -43,12 +51,8 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
-    const payload = {
-      sub: userLogin.id,
-      firstName: userLogin.first_name,
-      email: userLogin.email,
+    return {
+      token: await this.jwtService.signAsync({ email: userLogin.email }),
     };
-
-    return { token: await this.jwtService.signAsync(payload) };
   }
 }
