@@ -11,6 +11,7 @@ async function bootstrap() {
   const port: number = configService.get('URL_PORT');
   const prefix: string = configService.get('URL_PREFIX');
 
+  app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
